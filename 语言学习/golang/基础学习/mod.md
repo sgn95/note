@@ -51,3 +51,16 @@ https://goproxy.io/
 使用vscode开发 有错误警告 
     go mod vendor
 ```
+
+go.sum 是记录所依赖的项目的版本的锁定。
+
+本人使用vscode开发 settings.json 配置如下
+```
+{
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.toolsGopath": "${workspaceFolder}",
+    "go.formatTool": "goreturns",
+    "go.autocompleteUnimportedPackages": true,
+    "go.gopath": "G:/workspace"
+}
+```
