@@ -35,3 +35,16 @@ show tables;
     ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
     因为密码设置太简单 也可以关闭密码校验
     密码需要包含 大小写字母 数字 特殊字符
+
+https://juejin.im/post/5cd2d57951882540d928c2be
+
+sql连接 ODBC DSN connection strings 
+参考 https://www.connectionstrings.com/odbc-dsn/
+DSN (Data Source Name)
+mysql 连接驱动 连接名字
+https://github.com/go-sql-driver/mysql#dsn-data-source-name
+```
+system DSN
+DSN=myDsn;Uid=myUsername;Pwd=;
+File DSN
+FILEDSN=c:\myDsnFile.dsn;Uid=myUsername;Pwd=;```
