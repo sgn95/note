@@ -4,6 +4,9 @@
 为了告别GOPATH 使用go mod
 go modules 是golang 1.11版本添加的新特性
 
+## vendor
+vendor 是 1.5 release版本的发布 vendor 
+
 ## 使用
 ### 环境变量设置 GO111MODULE
 
@@ -24,6 +27,12 @@ tidy 增加丢失的module 去掉未用的module
 vendor 将依赖复制到vendor下
 verify 校验依赖
 why 解释为什么需要依赖
+
+    go mod 提供了module require replace 和 exclude 四个命令
+    module 语句指定包的名字 
+    require 指定的依赖项模块 
+    replace 语句可以替换依赖项模块
+    exclude 语句可以忽略依赖项
 
 ### 国内防火墙的问题 *
 

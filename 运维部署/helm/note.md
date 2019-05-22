@@ -37,3 +37,120 @@ kubectl config current-context
 
 参考
 https://helm.sh/docs/using_helm/#quickstart-guide
+
+yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+cat > ca-csr.json << EOF
+{
+  "CN": "kubernetes",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "BeiJing",
+      "L": "BeiJing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+
+cat > kubernetes-csr.json << EOF
+{
+   "CN": "kubernetes",
+    "hosts": [
+      "127.0.0.1",
+      "10.30.221.97",
+      "10.30.221.98",
+      "kubernetes",
+      "kubernetes.default.svc",
+      "kubernetes.default.svc.cluster",
+      "kubernetes.default.svc.cluster.local"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "BeiJing",
+            "L": "BeiJing",
+            "O": "k8s",
+            "OU": "System"
+        }
+    ]
+}
+EOF
+
+cat > admin-csr.json << EOF
+{
+  "CN": "admin",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "BeiJing",
+      "L": "BeiJing",
+      "O": "system:masters",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+
+cat > kube-proxy-csr.json << EOF
+{
+  "CN": "system:kube-proxy",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "BeiJing",
+      "L": "BeiJing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+        http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+
+apt-get update && apt-get install -y apt-transport-https curl
+curl -s http://packages.faasx.com/google/apt/doc/apt-key.gpg | sudo apt-key add -
+
+cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+deb http://mirrors.ustc.edu.cn/kubernetes/apt kubernetes-xenial main
+EOF
+
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+    
+apt-mark hold kubelet kubeadm kubectl
