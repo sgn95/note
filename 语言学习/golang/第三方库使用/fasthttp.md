@@ -42,3 +42,17 @@ args := &fasthttp.Args{}
 
 	fmt.Println(string(resp))
  ```
+ 请求
+ ```
+ req := &fasthttp.Request{}
+ req.SetRequestURI("http://XXXX")
+ req.SetBody(body)
+ req.Header.SetContentType("application/xml")
+ req.Header.SetMethod(method)
+ resp := &fasthttp.Response{}
+ client := &fasthttp.Client{}
+ if err := client.Do(req, resp); err != nil {
+	logger.Error("请求失败:", err.Error())
+	return nil, err
+ }
+ ```
