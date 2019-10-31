@@ -16,6 +16,10 @@ mqtt
 
 elasticsearch
 
+docker
+
+kubernets
+
 nginx openresty
 
 算法 
@@ -24,6 +28,8 @@ nginx openresty
 
 nodejs 
 
+
+
 react
 
-协议 http amqp
+协议 http amqp rpc
