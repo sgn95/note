@@ -28,3 +28,7 @@ t.Run() shun xun
  ```    
     
 go的benchmark
+
+
+go run  -race ...
+    build -race ... 检测数据是否有竞争 比如说同一个变量被多个goroutine操作
